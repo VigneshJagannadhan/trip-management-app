@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "324806043307",
+    "project_id": "trippify-3b37e",
+    "storage_bucket": "trippify-3b37e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:324806043307:android:e3297820b429de31af39ee",
+        "android_client_info": {
+          "package_name": "com.trippify.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEH44Z6X3dz4vMZbu35mDquFnMLp5RU9E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
