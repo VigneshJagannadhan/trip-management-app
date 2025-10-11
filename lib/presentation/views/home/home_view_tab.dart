@@ -70,14 +70,14 @@ class HomeViewSliverAppbar extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverAppBar(
       pinned: true,
-      expandedHeight: 50.h,
+      expandedHeight: 100.h,
       backgroundColor: Colors.transparent,
       automaticallyImplyLeading: false,
       flexibleSpace: ClipRRect(
         child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
           child: Container(
-            color: Colors.white.withOpacity(0.05),
+            color: Colors.white.withValues(alpha: 0.05),
             padding: EdgeInsets.symmetric(horizontal: 20.w),
             child: Column(
               children: [

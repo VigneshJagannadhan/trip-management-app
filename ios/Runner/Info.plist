@@ -45,5 +45,11 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app needs access to your photo library to select trip images.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>This app uses the camera to take photos for trip images.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Microphone access is required when recording videos with sound.</string>
 </dict>
 </plist>

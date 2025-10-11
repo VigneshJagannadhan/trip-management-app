@@ -18,6 +18,7 @@ class TripViewmodel extends BaseViewmodel {
     required String location,
     required DateTime startDate,
     required DateTime endDate,
+    String? imageUrl,
   }) async {
     try {
       isLoading = true;
@@ -26,7 +27,9 @@ class TripViewmodel extends BaseViewmodel {
         location: location,
         startTime: startDate,
         endTime: endDate,
+        imageUrl: imageUrl,
       );
+      await fetchTrips();
       showGeneralSuccessSnackbar(
         context: context,
         message: 'Trip created successfully',

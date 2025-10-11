@@ -21,7 +21,12 @@ class ChatTile extends StatelessWidget {
             fit: StackFit.expand,
             children: [
               // Background image
-              Image.network(AppAssets.dummyPlaceImage, fit: BoxFit.cover),
+              Image.network(
+                (trip.imageUrl.isNotEmpty
+                    ? trip.imageUrl
+                    : AppAssets.dummyPlaceImage),
+                fit: BoxFit.cover,
+              ),
 
               Container(
                 decoration: BoxDecoration(
