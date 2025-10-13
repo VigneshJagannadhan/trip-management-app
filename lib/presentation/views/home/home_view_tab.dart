@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
+import 'package:trippify/core/constants/app_assets.dart';
 import 'package:trippify/core/theme/app_colors.dart';
-import 'package:trippify/data/models/trip_model.dart';
 import 'package:trippify/presentation/viewmodels/trip_viewmodel.dart';
 import 'package:trippify/presentation/widgets/chat_tile.dart';
 import 'package:trippify/presentation/views/home/create_trip_tab.dart';
@@ -11,6 +12,7 @@ import 'package:trippify/presentation/views/home/settings_tab.dart';
 import 'package:trippify/l10n/app_localizations.dart';
 
 class HomeViewTab extends StatefulWidget {
+  static const String route = '/home';
   const HomeViewTab({super.key});
 
   @override
@@ -18,8 +20,6 @@ class HomeViewTab extends StatefulWidget {
 }
 
 class _HomeViewTabState extends State<HomeViewTab> {
-  String searchQuery = '';
-
   @override
   void initState() {
     super.initState();
@@ -29,29 +29,16 @@ class _HomeViewTabState extends State<HomeViewTab> {
     });
   }
 
-  List<TripModel> getFilteredTrips(List<TripModel> trips) {
-    if (searchQuery.isEmpty) return trips;
-    return trips.where((trip) {
-      final query = searchQuery.toLowerCase();
-      return trip.name.toLowerCase().contains(query) ||
-          trip.location.toLowerCase().contains(query) ||
-          trip.description.toLowerCase().contains(query);
-    }).toList();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Consumer<TripViewmodel>(
       builder: (context, tripVM, child) {
-        final filteredTrips = getFilteredTrips(tripVM.trips);
-
+        final filteredTrips = tripVM.getFilteredTrips();
         return Scaffold(
           body: CustomScrollView(
             slivers: [
               HomeViewSliverAppbar(
-                onSearchChanged: (query) {
-                  setState(() => searchQuery = query);
-                },
+                onSearchChanged: (query) => tripVM.searchQuery = query,
               ),
               SliverPadding(
                 padding: EdgeInsets.only(
@@ -60,6 +47,7 @@ class _HomeViewTabState extends State<HomeViewTab> {
                   top: 20.h,
                   bottom: 20.h,
                 ),
+
                 sliver:
                     tripVM.isLoading
                         ? SliverFillRemaining(child: _buildLoadingState())
@@ -77,23 +65,7 @@ class _HomeViewTabState extends State<HomeViewTab> {
               ),
             ],
           ),
-          floatingActionButton: FloatingActionButton.extended(
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => const CreateTripTab()),
-              );
-            },
-            backgroundColor: secondaryColor,
-            icon: const Icon(Icons.add, color: Colors.white),
-            label: Text(
-              'Create Trip',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
+          floatingActionButton: CreateTripButton(),
         );
       },
     );
@@ -216,6 +188,34 @@ class _HomeViewTabState extends State<HomeViewTab> {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class CreateTripButton extends StatelessWidget {
+  const CreateTripButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return FloatingActionButton.extended(
+      onPressed: () {
+        Navigator.of(
+          context,
+        ).push(MaterialPageRoute(builder: (context) => const CreateTripTab()));
+      },
+      backgroundColor: secondaryColor,
+      icon: SvgPicture.asset(
+        AppAssets.createIcon,
+        colorFilter: ColorFilter.mode(colorFFF, BlendMode.srcIn),
+      ),
+      label: Text(
+        'Create Trip',
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 14.sp,
+          fontWeight: FontWeight.w600,
+        ),
       ),
     );
   }

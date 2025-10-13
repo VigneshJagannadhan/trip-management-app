@@ -1,7 +1,7 @@
 import 'package:trippify/presentation/views/auth/login_view.dart';
 import 'package:trippify/presentation/views/auth/register_view.dart';
-import 'package:trippify/presentation/views/home/bottom_nav_view.dart';
 import 'package:trippify/presentation/views/auth/splash_screen.dart';
+import 'package:trippify/presentation/views/home/home_view_tab.dart';
 import 'package:trippify/presentation/views/trip_detail/trip_detail_view.dart';
 import 'package:trippify/presentation/views/profile/profile_edit_view.dart';
 import 'package:trippify/presentation/views/subscription/subscription_view.dart';
@@ -19,8 +19,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => LoginView());
       case RegisterView.route:
         return MaterialPageRoute(builder: (_) => RegisterView());
-      case HomeView.route:
-        return MaterialPageRoute(builder: (_) => const HomeView());
+      case HomeViewTab.route:
+        return MaterialPageRoute(builder: (_) => const HomeViewTab());
       case TripDetailView.route:
         final tripId = settings.arguments as String?;
         if (tripId == null) {

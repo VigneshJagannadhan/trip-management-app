@@ -18,6 +18,13 @@ class TripViewmodel extends BaseViewmodel {
   bool startDateError = false;
   bool endDateError = false;
 
+  String _searchQuery = '';
+  String get searchQuery => _searchQuery;
+  set searchQuery(String value) {
+    _searchQuery = value;
+    notifyListeners();
+  }
+
   void clearValidationErrors() {
     imageError = false;
     startDateError = false;
@@ -123,7 +130,6 @@ class TripViewmodel extends BaseViewmodel {
         endTime: trip.endTime,
       );
 
-      // Update local list
       final index = trips.indexWhere((t) => t.id == trip.id);
       if (index != -1) trips[index] = trip;
       notifyListeners();
@@ -196,6 +202,16 @@ class TripViewmodel extends BaseViewmodel {
       debugPrint('FetchTripById error: $e');
       return null;
     }
+  }
+
+  List<TripModel> getFilteredTrips() {
+    if (searchQuery.isEmpty) return trips;
+    return trips.where((trip) {
+      final query = searchQuery.toLowerCase();
+      return trip.name.toLowerCase().contains(query) ||
+          trip.location.toLowerCase().contains(query) ||
+          trip.description.toLowerCase().contains(query);
+    }).toList();
   }
 
   Future<bool> deleteTrip({

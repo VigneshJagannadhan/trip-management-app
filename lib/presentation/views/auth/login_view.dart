@@ -5,7 +5,7 @@ import 'package:trippify/core/theme/app_styles.dart';
 import 'package:trippify/core/utils/app_validators.dart';
 import 'package:trippify/presentation/viewmodels/auth_viewmodel.dart';
 import 'package:trippify/presentation/views/auth/register_view.dart';
-import 'package:trippify/presentation/views/home/bottom_nav_view.dart';
+import 'package:trippify/presentation/views/home/home_view_tab.dart';
 import 'package:trippify/presentation/widgets/custom_text_form_field.dart';
 import 'package:trippify/presentation/widgets/primary_button.dart';
 
@@ -63,7 +63,7 @@ class LoginView extends StatelessWidget {
                         if (result) {
                           Navigator.pushReplacementNamed(
                             context,
-                            HomeView.route,
+                            HomeViewTab.route,
                           );
                         }
                       }
