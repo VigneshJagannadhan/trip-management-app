@@ -10,7 +10,7 @@ import 'package:trippify/core/theme/app_theme.dart';
 import 'package:trippify/core/services/supabase_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:trippify/l10n/app_localizations.dart';
 import 'package:trippify/firebase_options.dart';
 import 'package:trippify/presentation/viewmodels/theme_viewmodel.dart';
 import 'package:trippify/presentation/viewmodels/language_viewmodel.dart';

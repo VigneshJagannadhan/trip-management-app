@@ -52,12 +52,21 @@ jobs:
           ls -la lib/l10n/
 
       - name: Generate localization files
-        run: flutter gen-l10n
+        run: |
+          echo "Generating localization files..."
+          flutter gen-l10n
+          echo "Generation complete!"
 
       - name: Verify generated files
         run: |
           echo "Checking generated localization files..."
-          find .dart_tool/flutter_gen -name "*.dart" || echo "No generated files found"
+          ls -la lib/l10n/ || echo "No files in lib/l10n/"
+          if [ -f "lib/l10n/app_localizations.dart" ]; then
+            echo "✅ app_localizations.dart found!"
+          else
+            echo "❌ app_localizations.dart NOT found!"
+            exit 1
+          fi
 
       - name: Analyze code
         run: flutter analyze --no-fatal-infos

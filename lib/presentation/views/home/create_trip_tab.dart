@@ -12,7 +12,7 @@ import 'package:trippify/core/services/supabase_service.dart';
 import 'dart:io';
 
 import 'package:trippify/presentation/widgets/snackbars/general_error_snackbar.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:trippify/l10n/app_localizations.dart';
 
 class CreateTripTab extends StatefulWidget {
   const CreateTripTab({super.key});
@@ -122,7 +122,7 @@ class _CreateTripTabState extends State<CreateTripTab> {
       body: Stack(
         children: [
           Form(
-            key: formKey,
+        key: formKey,
             child: SingleChildScrollView(
               padding: EdgeInsets.only(
                 left: 20.w,
@@ -130,9 +130,9 @@ class _CreateTripTabState extends State<CreateTripTab> {
                 top: 20.h,
                 bottom: 120.h,
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
                   GestureDetector(
                     onTap:
                         isCreating
@@ -274,37 +274,37 @@ class _CreateTripTabState extends State<CreateTripTab> {
                     ),
                   ),
                   SizedBox(height: 12.h),
-                  TextFormField(
-                    controller: tripNameController,
+            TextFormField(
+              controller: tripNameController,
                     enabled: !isCreating,
                     decoration: InputDecoration(
                       labelText: AppLocalizations.of(context)!.tripName,
                       prefixIcon: Icon(Icons.location_city),
                     ),
-                    validator: (value) {
+              validator: (value) {
                       if (value == null || value.isEmpty) {
                         return AppLocalizations.of(
                           context,
                         )!.enterTripNamePlease;
                       }
-                      return null;
-                    },
-                  ),
+                return null;
+              },
+            ),
                   SizedBox(height: 12.h),
-                  TextFormField(
-                    controller: tripLocationController,
+            TextFormField(
+              controller: tripLocationController,
                     enabled: !isCreating,
                     decoration: InputDecoration(
                       labelText: AppLocalizations.of(context)!.location,
                       prefixIcon: Icon(Icons.place),
                     ),
-                    validator: (value) {
+              validator: (value) {
                       if (value == null || value.isEmpty) {
                         return AppLocalizations.of(context)!.enterLocation;
                       }
-                      return null;
-                    },
-                  ),
+                return null;
+              },
+            ),
                   SizedBox(height: 12.h),
                   TextFormField(
                     controller: tripDescriptionController,
@@ -320,12 +320,12 @@ class _CreateTripTabState extends State<CreateTripTab> {
                     maxLength: 500,
                   ),
                   SizedBox(height: 8.h),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: DatePickerWidget(
-                          label:
-                              startDate != null
+            Row(
+              children: [
+                Expanded(
+                  child: DatePickerWidget(
+                    label:
+                        startDate != null
                                   ? startDate!.toLocal().toString().split(
                                     ' ',
                                   )[0]
@@ -345,14 +345,14 @@ class _CreateTripTabState extends State<CreateTripTab> {
                               setState(() => startDate = picked);
                             }
                           },
-                        ),
-                      ),
-                      SizedBox(width: 10.w),
-                      Expanded(
-                        child: DatePickerWidget(
-                          label:
-                              endDate != null
-                                  ? endDate!.toLocal().toString().split(' ')[0]
+                  ),
+                ),
+                SizedBox(width: 10.w),
+                Expanded(
+                  child: DatePickerWidget(
+                    label:
+                        endDate != null
+                            ? endDate!.toLocal().toString().split(' ')[0]
                                   : AppLocalizations.of(context)!.endDate,
                           isError: tripVM.endDateError,
                           enabled: !isCreating,
@@ -377,12 +377,12 @@ class _CreateTripTabState extends State<CreateTripTab> {
                               setState(() => endDate = picked);
                             }
                           },
-                        ),
-                      ),
-                    ],
                   ),
-                  SizedBox(height: 20.h),
-                  PrimaryButton(
+                ),
+              ],
+            ),
+            SizedBox(height: 20.h),
+            PrimaryButton(
                     label:
                         isCreating
                             ? AppLocalizations.of(context)!.creating
@@ -425,31 +425,31 @@ class _CreateTripTabState extends State<CreateTripTab> {
                                 return;
                               }
 
-                              final success = await tripVM.createTrip(
-                                context: context,
-                                name: tripNameController.text,
-                                location: tripLocationController.text,
+                  final success = await tripVM.createTrip(
+                    context: context,
+                    name: tripNameController.text,
+                    location: tripLocationController.text,
                                 description: tripDescriptionController.text,
                                 startDate: startDate!,
                                 endDate: endDate!,
                                 imageUrl: imageUrl,
-                              );
+                  );
 
-                              if (success) {
-                                tripNameController.clear();
-                                tripLocationController.clear();
+                  if (success) {
+                    tripNameController.clear();
+                    tripLocationController.clear();
                                 tripDescriptionController.clear();
                                 tripVM.clearValidationErrors();
-                                setState(() {
-                                  startDate = null;
-                                  endDate = null;
+                    setState(() {
+                      startDate = null;
+                      endDate = null;
                                   pickedImage = null;
-                                });
-                              }
-                            },
-                  ),
-                ],
-              ),
+                    });
+                }
+              },
+            ),
+          ],
+        ),
             ),
           ),
           if (isCreating)
