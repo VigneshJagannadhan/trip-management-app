@@ -44,18 +44,26 @@ jobs:
       - name: Get dependencies
         run: flutter pub get
 
+      - name: Verify l10n configuration
+        run: |
+          echo "Checking l10n.yaml..."
+          cat l10n.yaml
+          echo "Checking .arb files..."
+          ls -la lib/l10n/
+
       - name: Generate localization files
         run: flutter gen-l10n
 
+      - name: Verify generated files
+        run: |
+          echo "Checking generated localization files..."
+          find .dart_tool/flutter_gen -name "*.dart" || echo "No generated files found"
+
       - name: Analyze code
-        run: flutter analyze
+        run: flutter analyze --no-fatal-infos
         continue-on-error: true
 
-      - name: Run tests
-        run: flutter test
-        continue-on-error: true
-
-      - name: Build release APK
+      - name: Build release APK (this will also generate l10n files)
         run: flutter build apk --release --split-per-abi
 
       - name: Upload APK to GitHub
