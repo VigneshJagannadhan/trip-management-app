@@ -1,0 +1,41 @@
+name: Flutter Build & Upload
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 'stable'
+
+      - name: Flutter clean
+        run: flutter clean
+
+      - name: Get dependencies
+        run: flutter pub get
+
+      - name: Build release APK
+        run: flutter build apk --release
+
+      - name: Upload APK to GitHub (optional)
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-release.apk
+          path: build/app/outputs/flutter-apk/app-release.apk
+
+      - name: Upload to Google Drive
+        uses: adityak74/google-drive-upload-action@v1.3
+        with:
+          credentials: ${{ secrets.GDRIVE_CREDENTIALS }}
+          filename: build/app/outputs/flutter-apk/app-release.apk
+          folderId: ${{ secrets.GDRIVE_FOLDER_ID }}
