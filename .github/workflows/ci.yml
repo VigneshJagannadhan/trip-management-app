@@ -103,7 +103,8 @@ jobs:
         if: github.ref == 'refs/heads/master' && github.event_name == 'push'
         uses: adityak74/google-drive-upload-git-action@v0.3
         with:
-          credentials: ${{ secrets.GDRIVE_CREDENTIALS_BASE64 }}
+          credentials: ${{ secrets.GDRIVE_CREDENTIALS }}
           filename: build/app/outputs/flutter-apk/app-release.apk
-          folderId: ${{ secrets.GDRIVE_FOLDER_ID }}
-          name: trippify-${{ github.sha }}.apk
+          folderId: your_google_drive_folder_id_here
+          name: app-release-${{ github.run_number }}.apk
+          overwrite: false
