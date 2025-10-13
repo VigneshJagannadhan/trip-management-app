@@ -10,7 +10,7 @@
 
 Trippify is a comprehensive travel planning application that enables users to create, manage, and collaborate on trips with friends. Built with clean architecture principles and modern Flutter best practices, it showcases advanced mobile development skills including real-time messaging, state management, multi-platform support, and internationalization.
 
-<img width="2160" height="1080" alt="trippify_2" src="https://github.com/user-attachments/assets/b910b1e8-8892-4b0b-8d27-260047090d94" />
+<img width="2160" height="1080" alt="trippify_3" src="https://github.com/user-attachments/assets/02d3cfa8-def0-46cd-9dc3-9ce6fe904d6c" />
 
 ### Key Highlights
 - 🏗️ **Clean Architecture** with separation of concerns
