@@ -72,14 +72,26 @@ jobs:
         run: flutter analyze --no-fatal-infos
         continue-on-error: true
 
-      - name: Build release APK (this will also generate l10n files)
+      - name: Build split APKs for GitHub
         run: flutter build apk --release --split-per-abi
 
-      - name: Upload APK to GitHub
+      - name: Upload split APKs to GitHub
         uses: actions/upload-artifact@v4
         with:
-          name: app-release-apks
+          name: app-release-split-apks
           path: build/app/outputs/flutter-apk/*.apk
+          retention-days: 30
+
+      - name: Build universal APK for Google Drive
+        if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+        run: flutter build apk --release
+
+      - name: Upload universal APK to GitHub
+        if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-release-universal
+          path: build/app/outputs/flutter-apk/app-release.apk
           retention-days: 30
 
       - name: Upload to Google Drive
