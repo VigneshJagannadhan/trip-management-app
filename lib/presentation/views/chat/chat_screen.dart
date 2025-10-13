@@ -23,6 +23,7 @@ class _ChatScreenState extends State<ChatScreen> {
   final TextEditingController messageController = TextEditingController();
   final ScrollController scrollController = ScrollController();
   Map<String, UserModel> userCache = {};
+  bool isLoadingChatroom = true;
 
   @override
   void initState() {
@@ -33,6 +34,11 @@ class _ChatScreenState extends State<ChatScreen> {
   Future<void> _loadChatroom() async {
     final chatVM = Provider.of<ChatViewmodel>(context, listen: false);
     await chatVM.fetchChatroomByTripId(tripId: widget.tripId);
+    if (mounted) {
+      setState(() {
+        isLoadingChatroom = false;
+      });
+    }
   }
 
   @override
@@ -95,7 +101,7 @@ class _ChatScreenState extends State<ChatScreen> {
       ),
       body: Consumer<ChatViewmodel>(
         builder: (context, chatVM, _) {
-          if (chatVM.isLoading) {
+          if (isLoadingChatroom) {
             return const Center(child: CircularProgressIndicator());
           }
 

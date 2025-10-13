@@ -16,7 +16,6 @@ class ChatViewmodel extends BaseViewmodel {
 
   Future<ChatroomModel?> fetchChatroomByTripId({required String tripId}) async {
     try {
-      isLoading = true;
       currentChatroom = await chatRepo.getChatroomByTripId(tripId: tripId);
 
       if (currentChatroom != null) {
@@ -27,8 +26,6 @@ class ChatViewmodel extends BaseViewmodel {
     } catch (e) {
       debugPrint('FetchChatroomByTripId error: $e');
       return null;
-    } finally {
-      isLoading = false;
     }
   }
 

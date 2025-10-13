@@ -12,6 +12,7 @@ import 'package:trippify/core/services/supabase_service.dart';
 import 'dart:io';
 
 import 'package:trippify/presentation/widgets/snackbars/general_error_snackbar.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CreateTripTab extends StatefulWidget {
   const CreateTripTab({super.key});
@@ -110,7 +111,7 @@ class _CreateTripTabState extends State<CreateTripTab> {
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: Text(
-          "Create a Trip",
+          AppLocalizations.of(context)!.createTrip,
           style: TextStyle(
             fontSize: 20.sp,
             fontWeight: FontWeight.w600,
@@ -167,7 +168,9 @@ class _CreateTripTabState extends State<CreateTripTab> {
                                     const CircularProgressIndicator(),
                                     SizedBox(height: 12.h),
                                     Text(
-                                      'Uploading image...',
+                                      AppLocalizations.of(
+                                        context,
+                                      )!.uploadingImagePleaseWait,
                                       style: TextStyle(
                                         fontSize: 14.sp,
                                         color:
@@ -199,7 +202,9 @@ class _CreateTripTabState extends State<CreateTripTab> {
                                   ),
                                   SizedBox(height: 8.h),
                                   Text(
-                                    'Add Trip Photo',
+                                    AppLocalizations.of(
+                                      context,
+                                    )!.addTripPhotoTapToSelect,
                                     style: TextStyle(
                                       fontSize: 15.sp,
                                       fontWeight: FontWeight.w600,
@@ -211,7 +216,9 @@ class _CreateTripTabState extends State<CreateTripTab> {
                                   ),
                                   SizedBox(height: 2.h),
                                   Text(
-                                    'Tap to select',
+                                    AppLocalizations.of(
+                                      context,
+                                    )!.tapToSelectImage,
                                     style: TextStyle(
                                       fontSize: 12.sp,
                                       color:
@@ -270,13 +277,16 @@ class _CreateTripTabState extends State<CreateTripTab> {
                   TextFormField(
                     controller: tripNameController,
                     enabled: !isCreating,
-                    decoration: const InputDecoration(
-                      labelText: "Trip Name",
+                    decoration: InputDecoration(
+                      labelText: AppLocalizations.of(context)!.tripName,
                       prefixIcon: Icon(Icons.location_city),
                     ),
                     validator: (value) {
-                      if (value == null || value.isEmpty)
-                        return 'Enter trip name';
+                      if (value == null || value.isEmpty) {
+                        return AppLocalizations.of(
+                          context,
+                        )!.enterTripNamePlease;
+                      }
                       return null;
                     },
                   ),
@@ -284,13 +294,14 @@ class _CreateTripTabState extends State<CreateTripTab> {
                   TextFormField(
                     controller: tripLocationController,
                     enabled: !isCreating,
-                    decoration: const InputDecoration(
-                      labelText: "Location",
+                    decoration: InputDecoration(
+                      labelText: AppLocalizations.of(context)!.location,
                       prefixIcon: Icon(Icons.place),
                     ),
                     validator: (value) {
-                      if (value == null || value.isEmpty)
-                        return 'Enter location';
+                      if (value == null || value.isEmpty) {
+                        return AppLocalizations.of(context)!.enterLocation;
+                      }
                       return null;
                     },
                   ),
@@ -298,9 +309,11 @@ class _CreateTripTabState extends State<CreateTripTab> {
                   TextFormField(
                     controller: tripDescriptionController,
                     enabled: !isCreating,
-                    decoration: const InputDecoration(
-                      labelText: "Description (Optional)",
-                      hintText: "Tell us about your trip...",
+                    decoration: InputDecoration(
+                      labelText:
+                          AppLocalizations.of(context)!.descriptionOptional,
+                      hintText:
+                          AppLocalizations.of(context)!.tellUsAboutYourTrip,
                     ),
                     minLines: 1,
                     maxLines: 5,
@@ -316,7 +329,7 @@ class _CreateTripTabState extends State<CreateTripTab> {
                                   ? startDate!.toLocal().toString().split(
                                     ' ',
                                   )[0]
-                                  : 'Start Date',
+                                  : AppLocalizations.of(context)!.startDate,
                           isError: tripVM.startDateError,
                           enabled: !isCreating,
                           onTap: () async {
@@ -328,8 +341,9 @@ class _CreateTripTabState extends State<CreateTripTab> {
                               firstDate: DateTime(now.year - 1),
                               lastDate: DateTime(now.year + 5),
                             );
-                            if (picked != null)
+                            if (picked != null) {
                               setState(() => startDate = picked);
+                            }
                           },
                         ),
                       ),
@@ -339,7 +353,7 @@ class _CreateTripTabState extends State<CreateTripTab> {
                           label:
                               endDate != null
                                   ? endDate!.toLocal().toString().split(' ')[0]
-                                  : 'End Date',
+                                  : AppLocalizations.of(context)!.endDate,
                           isError: tripVM.endDateError,
                           enabled: !isCreating,
                           onTap: () async {
@@ -359,8 +373,9 @@ class _CreateTripTabState extends State<CreateTripTab> {
                               firstDate: base,
                               lastDate: DateTime(base.year + 5),
                             );
-                            if (picked != null)
+                            if (picked != null) {
                               setState(() => endDate = picked);
+                            }
                           },
                         ),
                       ),
@@ -368,14 +383,20 @@ class _CreateTripTabState extends State<CreateTripTab> {
                   ),
                   SizedBox(height: 20.h),
                   PrimaryButton(
-                    label: isCreating ? "Creating..." : "Create Trip",
+                    label:
+                        isCreating
+                            ? AppLocalizations.of(context)!.creating
+                            : AppLocalizations.of(context)!.createTrip,
                     onTap:
                         isCreating
                             ? null
                             : () async {
                               if (!formKey.currentState!.validate()) {
                                 showGeneralErrorSnackbar(
-                                  message: 'Please fill all required fields',
+                                  message:
+                                      AppLocalizations.of(
+                                        context,
+                                      )!.pleaseFillAllRequiredFields,
                                   context: context,
                                 );
                                 return;
@@ -396,7 +417,9 @@ class _CreateTripTabState extends State<CreateTripTab> {
                               if (imageUrl == null) {
                                 showGeneralErrorSnackbar(
                                   message:
-                                      'Failed to upload image. Please try again.',
+                                      AppLocalizations.of(
+                                        context,
+                                      )!.failedToUploadImagePleaseTryAgain,
                                   context: context,
                                 );
                                 return;
@@ -449,7 +472,7 @@ class _CreateTripTabState extends State<CreateTripTab> {
                       ),
                       SizedBox(height: 16.h),
                       Text(
-                        'Creating your trip...',
+                        AppLocalizations.of(context)!.creatingYourTrip,
                         style: TextStyle(
                           fontSize: 16.sp,
                           fontWeight: FontWeight.w600,

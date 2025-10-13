@@ -1,5 +1,5 @@
-import 'package:nested/nested.dart';
 import 'package:provider/provider.dart';
+import 'package:provider/single_child_widget.dart';
 import 'package:trippify/core/di/injector.dart';
 import 'package:trippify/presentation/viewmodels/theme_viewmodel.dart';
 import 'package:trippify/presentation/viewmodels/language_viewmodel.dart';
