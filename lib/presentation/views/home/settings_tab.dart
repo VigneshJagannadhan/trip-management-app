@@ -9,6 +9,7 @@ import 'package:trippify/presentation/views/subscription/subscription_view.dart'
 import 'package:trippify/presentation/viewmodels/theme_viewmodel.dart';
 import 'package:trippify/presentation/viewmodels/language_viewmodel.dart';
 import 'package:trippify/presentation/widgets/primary_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SettingsTab extends StatelessWidget {
   const SettingsTab({super.key});
@@ -18,7 +19,7 @@ class SettingsTab extends StatelessWidget {
       context: context,
       builder:
           (context) => AlertDialog(
-            title: const Text('Select Language'),
+            title: Text(AppLocalizations.of(context)!.selectLanguage),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children:
@@ -63,7 +64,7 @@ class SettingsTab extends StatelessWidget {
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: Text(
-          "Settings",
+          AppLocalizations.of(context)!.settings,
           style: TextStyle(
             fontSize: 20.sp,
             fontWeight: FontWeight.w600,
@@ -76,83 +77,9 @@ class SettingsTab extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-          Consumer<ThemeViewmodel>(
-            builder: (context, themeVM, child) {
-              return Container(
-                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
-                decoration: BoxDecoration(
-                  color: neutral800,
-                  borderRadius: BorderRadius.circular(12.r),
-                  border: Border.all(
-                    color: Colors.white.withValues(alpha: 0.1),
-                  ),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.all(8.r),
-                          decoration: BoxDecoration(
-                            color: secondaryColor.withValues(alpha: 0.2),
-                            borderRadius: BorderRadius.circular(8.r),
-                          ),
-                          child: Icon(
-                            themeVM.isDarkMode
-                                ? Icons.dark_mode
-                                : Icons.light_mode,
-                            color: secondaryColor,
-                            size: 20.r,
-                          ),
-                        ),
-                        SizedBox(width: 12.w),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Theme Mode',
-                              style: TextStyle(
-                                fontSize: 16.sp,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            Text(
-                              themeVM.isDarkMode ? 'Dark Mode' : 'Light Mode',
-                              style: TextStyle(
-                                fontSize: 12.sp,
-                                color: Colors.white.withValues(alpha: 0.6),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    Switch(
-                      value: themeVM.isDarkMode,
-                      onChanged: (value) => themeVM.toggleTheme(),
-                      activeColor: secondaryColor,
-                    ),
-                  ],
-                ),
-              );
-            },
-          ),
-          SizedBox(height: 20.h),
-
-          // Language Selector
-          Consumer<LanguageViewmodel>(
-            builder: (context, langVM, child) {
-              final currentLang = langVM.supportedLanguages.firstWhere(
-                (lang) => lang.locale == langVM.currentLocale,
-              );
-
-              return GestureDetector(
-                onTap: () {
-                  _showLanguageDialog(context, langVM);
-                },
-                child: Container(
+            Consumer<ThemeViewmodel>(
+              builder: (context, themeVM, child) {
+                return Container(
                   padding: EdgeInsets.symmetric(
                     horizontal: 16.w,
                     vertical: 12.h,
@@ -176,7 +103,9 @@ class SettingsTab extends StatelessWidget {
                               borderRadius: BorderRadius.circular(8.r),
                             ),
                             child: Icon(
-                              Icons.language,
+                              themeVM.isDarkMode
+                                  ? Icons.dark_mode
+                                  : Icons.light_mode,
                               color: secondaryColor,
                               size: 20.r,
                             ),
@@ -186,7 +115,7 @@ class SettingsTab extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Language',
+                                AppLocalizations.of(context)!.themeMode,
                                 style: TextStyle(
                                   fontSize: 16.sp,
                                   color: Colors.white,
@@ -194,7 +123,9 @@ class SettingsTab extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                '${currentLang.flag} ${currentLang.name}',
+                                themeVM.isDarkMode
+                                    ? AppLocalizations.of(context)!.darkMode
+                                    : AppLocalizations.of(context)!.lightMode,
                                 style: TextStyle(
                                   fontSize: 12.sp,
                                   color: Colors.white.withValues(alpha: 0.6),
@@ -204,41 +135,116 @@ class SettingsTab extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Icon(
-                        Icons.arrow_forward_ios,
-                        color: Colors.white.withValues(alpha: 0.5),
-                        size: 16.r,
+                      Switch(
+                        value: themeVM.isDarkMode,
+                        onChanged: (value) => themeVM.toggleTheme(),
+                        activeColor: secondaryColor,
                       ),
                     ],
                   ),
-                ),
-              );
-            },
-          ),
-          SizedBox(height: 20.h),
-          PrimaryButton(
-            label: "Profile",
-            onTap: () async {
-              Navigator.of(context).pushNamed(ProfileEditView.route);
-            },
-          ),
-          SizedBox(height: 20.h),
-          PrimaryButton(
-            label: "Subscriptions",
-            onTap: () async {
-              Navigator.of(context).pushNamed(SubscriptionView.route);
-            },
-          ),
-          SizedBox(height: 20.h),
-          PrimaryButton(
-            label: "Logout",
-            onTap: () async {
-              await FirebaseAuth.instance.signOut();
-              Navigator.of(context).pushReplacementNamed(LoginView.route);
-            },
-            backgroundColor: Colors.red,
-          ),
-          SizedBox(height: 20.h),
+                );
+              },
+            ),
+            SizedBox(height: 20.h),
+
+            // Language Selector
+            Consumer<LanguageViewmodel>(
+              builder: (context, langVM, child) {
+                final currentLang = langVM.supportedLanguages.firstWhere(
+                  (lang) => lang.locale == langVM.currentLocale,
+                );
+
+                return GestureDetector(
+                  onTap: () {
+                    _showLanguageDialog(context, langVM);
+                  },
+                  child: Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 16.w,
+                      vertical: 12.h,
+                    ),
+                    decoration: BoxDecoration(
+                      color: neutral800,
+                      borderRadius: BorderRadius.circular(12.r),
+                      border: Border.all(
+                        color: Colors.white.withValues(alpha: 0.1),
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            Container(
+                              padding: EdgeInsets.all(8.r),
+                              decoration: BoxDecoration(
+                                color: secondaryColor.withValues(alpha: 0.2),
+                                borderRadius: BorderRadius.circular(8.r),
+                              ),
+                              child: Icon(
+                                Icons.language,
+                                color: secondaryColor,
+                                size: 20.r,
+                              ),
+                            ),
+                            SizedBox(width: 12.w),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  AppLocalizations.of(context)!.language,
+                                  style: TextStyle(
+                                    fontSize: 16.sp,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                Text(
+                                  '${currentLang.flag} ${currentLang.name}',
+                                  style: TextStyle(
+                                    fontSize: 12.sp,
+                                    color: Colors.white.withValues(alpha: 0.6),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        Icon(
+                          Icons.arrow_forward_ios,
+                          color: Colors.white.withValues(alpha: 0.5),
+                          size: 16.r,
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
+            SizedBox(height: 20.h),
+            PrimaryButton(
+              label: AppLocalizations.of(context)!.profile,
+              onTap: () async {
+                Navigator.of(context).pushNamed(ProfileEditView.route);
+              },
+            ),
+            SizedBox(height: 20.h),
+            PrimaryButton(
+              label: AppLocalizations.of(context)!.subscriptions,
+              onTap: () async {
+                Navigator.of(context).pushNamed(SubscriptionView.route);
+              },
+            ),
+            SizedBox(height: 20.h),
+            PrimaryButton(
+              label: AppLocalizations.of(context)!.logout,
+              onTap: () async {
+                await FirebaseAuth.instance.signOut();
+                Navigator.of(context).pushReplacementNamed(LoginView.route);
+              },
+              backgroundColor: Colors.red,
+            ),
+            SizedBox(height: 20.h),
           ],
         ),
       ),

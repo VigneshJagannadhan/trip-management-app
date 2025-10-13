@@ -8,6 +8,7 @@ import 'package:trippify/presentation/widgets/chat_tile.dart';
 import 'package:trippify/presentation/views/home/create_trip_tab.dart';
 import 'package:trippify/presentation/views/home/friends_tab.dart';
 import 'package:trippify/presentation/views/home/settings_tab.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeViewTab extends StatefulWidget {
   const HomeViewTab({super.key});
@@ -122,7 +123,7 @@ class _HomeViewTabState extends State<HomeViewTab> {
           ),
           SizedBox(height: 20.h),
           Text(
-            "Loading your trips...",
+            AppLocalizations.of(context)!.loadingTrips,
             style: TextStyle(
               fontSize: 16.sp,
               color:
@@ -159,7 +160,7 @@ class _HomeViewTabState extends State<HomeViewTab> {
           ),
           SizedBox(height: 24.h),
           Text(
-            "No trips yet",
+            AppLocalizations.of(context)!.noTripsYet,
             style: TextStyle(
               fontSize: 24.sp,
               color: isDarkMode ? Colors.white : neutral900,
@@ -168,7 +169,7 @@ class _HomeViewTabState extends State<HomeViewTab> {
           ),
           SizedBox(height: 8.h),
           Text(
-            "Start your adventure by creating\nyour first trip",
+            AppLocalizations.of(context)!.startYourAdventure,
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 16.sp,
@@ -204,7 +205,7 @@ class _HomeViewTabState extends State<HomeViewTab> {
                 ),
                 SizedBox(width: 8.w),
                 Text(
-                  "Create Trip",
+                  AppLocalizations.of(context)!.createTrip,
                   style: TextStyle(
                     fontSize: 14.sp,
                     color: isDarkMode ? Colors.white : secondaryColor,
@@ -277,7 +278,7 @@ class _HomeViewSliverAppbarState extends State<HomeViewSliverAppbar> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Welcome back!",
+                            AppLocalizations.of(context)!.welcomeBack,
                             style: TextStyle(
                               fontSize: 14.sp,
                               color: subtextColor,
@@ -286,7 +287,7 @@ class _HomeViewSliverAppbarState extends State<HomeViewSliverAppbar> {
                           ),
                           SizedBox(height: 4.h),
                           Text(
-                            "Your Trips",
+                            AppLocalizations.of(context)!.yourTrips,
                             style: TextStyle(
                               fontSize: 24.sp,
                               color: textColor,
@@ -370,7 +371,7 @@ class _HomeViewSliverAppbarState extends State<HomeViewSliverAppbar> {
                     onChanged: widget.onSearchChanged,
                     style: TextStyle(color: textColor, fontSize: 15.sp),
                     decoration: InputDecoration(
-                      hintText: "Search your trips...",
+                      hintText: AppLocalizations.of(context)!.searchTrips,
                       hintStyle: TextStyle(
                         color: subtextColor,
                         fontSize: 15.sp,
