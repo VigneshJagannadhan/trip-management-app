@@ -6,7 +6,9 @@
   "yourTrips": "I Tuoi Viaggi",
   "searchTrips": "Cerca i tuoi viaggi...",
   "noTrips": "Nessun viaggio ancora",
+  "noTripsYet": "Nessun viaggio ancora",
   "startAdventure": "Inizia la tua avventura creando\nil tuo primo viaggio",
+  "startYourAdventure": "Inizia la tua avventura creando\nil tuo primo viaggio",
   "createTrip": "Crea Viaggio",
   "loadingTrips": "Caricamento dei tuoi viaggi...",
   
@@ -33,6 +35,8 @@
   "themeMode": "Modalità Tema",
   "darkMode": "Modalità Scura",
   "lightMode": "Modalità Chiara",
+  "language": "Lingua",
+  "selectLanguage": "Seleziona Lingua",
   "logout": "Disconnetti",
   
   "editProfile": "Modifica Profilo",

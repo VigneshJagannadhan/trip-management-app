@@ -6,7 +6,9 @@
   "yourTrips": "Deine Reisen",
   "searchTrips": "Reisen durchsuchen...",
   "noTrips": "Noch keine Reisen",
+  "noTripsYet": "Noch keine Reisen",
   "startAdventure": "Beginne dein Abenteuer, indem du\ndeine erste Reise erstellst",
+  "startYourAdventure": "Beginne dein Abenteuer, indem du\ndeine erste Reise erstellst",
   "createTrip": "Reise Erstellen",
   "loadingTrips": "Lade deine Reisen...",
   
@@ -33,6 +35,8 @@
   "themeMode": "Design-Modus",
   "darkMode": "Dunkler Modus",
   "lightMode": "Heller Modus",
+  "language": "Sprache",
+  "selectLanguage": "Sprache Auswählen",
   "logout": "Abmelden",
   
   "editProfile": "Profil Bearbeiten",

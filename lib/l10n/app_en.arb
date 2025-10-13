@@ -6,7 +6,9 @@
   "yourTrips": "Your Trips",
   "searchTrips": "Search your trips...",
   "noTrips": "No trips yet",
+  "noTripsYet": "No trips yet",
   "startAdventure": "Start your adventure by creating\nyour first trip",
+  "startYourAdventure": "Start your adventure by creating\nyour first trip",
   "createTrip": "Create Trip",
   "loadingTrips": "Loading your trips...",
   
@@ -33,6 +35,8 @@
   "themeMode": "Theme Mode",
   "darkMode": "Dark Mode",
   "lightMode": "Light Mode",
+  "language": "Language",
+  "selectLanguage": "Select Language",
   "logout": "Logout",
   
   "editProfile": "Edit Profile",
