@@ -8,11 +8,13 @@ class DatePickerWidget extends StatelessWidget {
     required this.label,
     this.onTap,
     this.isError = false,
+    this.enabled = true,
   });
 
   final String label;
   final VoidCallback? onTap;
   final bool isError;
+  final bool enabled;
 
   @override
   Widget build(BuildContext context) {
@@ -35,43 +37,46 @@ class DatePickerWidget extends StatelessWidget {
         isSelected ? secondaryColor : (isDarkMode ? Colors.white : neutral900);
 
     return InkWell(
-      onTap: onTap,
+      onTap: enabled ? onTap : null,
       borderRadius: BorderRadius.circular(12.r),
-      child: Container(
-        height: 56.h,
-        padding: EdgeInsets.symmetric(horizontal: 16.w),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12.r),
-          border: Border.all(color: borderColor, width: isError ? 2 : 1),
-          color: bgColor,
-        ),
-        child: Row(
-          children: [
-            Icon(
-              Icons.calendar_today,
-              size: 18.r,
-              color:
-                  isSelected
-                      ? secondaryColor
-                      : (isDarkMode ? neutral400 : neutral600),
-            ),
-            SizedBox(width: 12.w),
-            Expanded(
-              child: Text(
-                label,
-                style: TextStyle(
-                  fontSize: 15.sp,
-                  fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
-                  color: textColor,
+      child: Opacity(
+        opacity: enabled ? 1.0 : 0.5,
+        child: Container(
+          height: 56.h,
+          padding: EdgeInsets.symmetric(horizontal: 16.w),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12.r),
+            border: Border.all(color: borderColor, width: isError ? 2 : 1),
+            color: bgColor,
+          ),
+          child: Row(
+            children: [
+              Icon(
+                Icons.calendar_today,
+                size: 18.r,
+                color:
+                    isSelected
+                        ? secondaryColor
+                        : (isDarkMode ? neutral400 : neutral600),
+              ),
+              SizedBox(width: 12.w),
+              Expanded(
+                child: Text(
+                  label,
+                  style: TextStyle(
+                    fontSize: 15.sp,
+                    fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
+                    color: textColor,
+                  ),
                 ),
               ),
-            ),
-            Icon(
-              Icons.arrow_drop_down,
-              color: isDarkMode ? neutral400 : neutral600,
-              size: 24.r,
-            ),
-          ],
+              Icon(
+                Icons.arrow_drop_down,
+                color: isDarkMode ? neutral400 : neutral600,
+                size: 24.r,
+              ),
+            ],
+          ),
         ),
       ),
     );
