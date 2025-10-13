@@ -34,7 +34,7 @@ jobs:
           path: build/app/outputs/flutter-apk/app-release.apk
 
       - name: Upload to Google Drive
-        uses: adityak74/google-drive-upload-action@v1.3
+        uses: adityak74/google-drive-upload-git-action@v0.3
         with:
           credentials: ${{ secrets.GDRIVE_CREDENTIALS }}
           filename: build/app/outputs/flutter-apk/app-release.apk
