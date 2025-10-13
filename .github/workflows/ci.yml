@@ -94,12 +94,16 @@ jobs:
           path: build/app/outputs/flutter-apk/app-release.apk
           retention-days: 30
 
+      - name: Encode credentials to base64
+        if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+        run: |
+          echo "${{ secrets.GDRIVE_CREDENTIALS }}" | base64 > credentials.b64
+
       - name: Upload to Google Drive
         if: github.ref == 'refs/heads/master' && github.event_name == 'push'
         uses: adityak74/google-drive-upload-git-action@v0.3
         with:
-          credentials: ${{ secrets.GDRIVE_CREDENTIALS }}
+          credentials: ${{ secrets.GDRIVE_CREDENTIALS_BASE64 }}
           filename: build/app/outputs/flutter-apk/app-release.apk
           folderId: ${{ secrets.GDRIVE_FOLDER_ID }}
           name: trippify-${{ github.sha }}.apk
-          isBase64: false
