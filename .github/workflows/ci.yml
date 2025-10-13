@@ -107,4 +107,4 @@ jobs:
           filename: build/app/outputs/flutter-apk/app-release.apk
           folderId: ${{ secrets.GDRIVE_FOLDER_ID }}
           name: app-release-${{ github.run_number }}.apk
-          overwrite: false
+          overwrite: true
