@@ -35,10 +35,10 @@ class AuthRepoImpl extends AuthRepo {
 
       if (user != null) {
         await _firestore.collection('users').doc(user.uid).set({
-          'id': user.uid,
           'email': email,
-          'name': name,
-          'nickname': nickName ?? '',
+          'displayName': name,
+          'phoneNumber': null,
+          'photoUrl': null,
           'createdAt': FieldValue.serverTimestamp(),
         });
       }

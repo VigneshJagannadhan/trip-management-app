@@ -1,10 +1,29 @@
 import 'package:flutter/material.dart';
 
-Color get primaryColor => const Color.fromARGB(255, 21, 27, 51);
-Color get darkPrimaryColor => const Color.fromARGB(255, 255, 255, 255);
+// Modern Travel Theme Colors
+Color get primaryColor => const Color(0xFF0F172A); // Deep navy blue
+Color get darkPrimaryColor => const Color(0xFFF8FAFC); // Light cream
 
-Color get secondaryColor => const Color(0xFF764ba2);
-Color get darkSecondaryColor => const Color(0xFF764ba2);
+Color get secondaryColor => const Color(0xFF3B82F6); // Modern blue
+Color get darkSecondaryColor => const Color(0xFF1E40AF); // Darker blue
+
+// Travel-inspired accent colors
+Color get accentOrange => const Color(0xFFFF6B35); // Vibrant orange
+Color get accentTeal => const Color(0xFF14B8A6); // Teal green
+Color get accentPurple => const Color(0xFF8B5CF6); // Purple
+Color get accentPink => const Color(0xFFEC4899); // Pink
+
+// Modern grays
+Color get neutral900 => const Color(0xFF0F172A);
+Color get neutral800 => const Color(0xFF1E293B);
+Color get neutral700 => const Color(0xFF334155);
+Color get neutral600 => const Color(0xFF475569);
+Color get neutral500 => const Color(0xFF64748B);
+Color get neutral400 => const Color(0xFF94A3B8);
+Color get neutral300 => const Color(0xFFCBD5E1);
+Color get neutral200 => const Color(0xFFE2E8F0);
+Color get neutral100 => const Color(0xFFF1F5F9);
+Color get neutral50 => const Color(0xFFF8FAFC);
 
 /// Brand Colors
 Color get primaryBlue => color3EA2F3;

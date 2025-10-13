@@ -1,0 +1,63 @@
+{
+  "@@locale": "de",
+  
+  "appTitle": "Trippify",
+  "welcomeBack": "Willkommen zurück!",
+  "yourTrips": "Deine Reisen",
+  "searchTrips": "Reisen durchsuchen...",
+  "noTrips": "Noch keine Reisen",
+  "startAdventure": "Beginne dein Abenteuer, indem du\ndeine erste Reise erstellst",
+  "createTrip": "Reise Erstellen",
+  "loadingTrips": "Lade deine Reisen...",
+  
+  "tripName": "Reisename",
+  "location": "Standort",
+  "description": "Beschreibung (Optional)",
+  "descriptionHint": "Erzähle uns von deiner Reise...",
+  "startDate": "Startdatum",
+  "endDate": "Enddatum",
+  "selectImage": "Bild Auswählen",
+  "uploading": "Hochladen...",
+  "create": "Erstellen",
+  
+  "tripDetails": "Reisedetails",
+  "members": "Mitglieder",
+  "inviteFriends": "Freunde Einladen",
+  "addMorePeople": "Weitere Personen zu dieser Reise hinzufügen",
+  "duration": "Dauer",
+  "active": "Aktiv",
+  
+  "settings": "Einstellungen",
+  "profile": "Profil",
+  "subscriptions": "Abonnements",
+  "themeMode": "Design-Modus",
+  "darkMode": "Dunkler Modus",
+  "lightMode": "Heller Modus",
+  "logout": "Abmelden",
+  
+  "editProfile": "Profil Bearbeiten",
+  "displayName": "Anzeigename",
+  "phoneNumber": "Telefonnummer (Optional)",
+  "email": "E-Mail",
+  "verified": "Verifiziert",
+  "saveChanges": "Änderungen Speichern",
+  
+  "upgradeToPremium": "Auf Premium Upgraden",
+  "unlockFeatures": "Unbegrenzte Reisen und Premium-Funktionen freischalten",
+  "monthlyPlan": "Monatsplan",
+  "yearlyPlan": "Jahresplan",
+  "perMonth": "/Monat",
+  "perYear": "/Jahr",
+  "bestValue": "BESTER WERT",
+  "subscribe": "Abonnieren",
+  
+  "deleteTrip": "Reise Löschen",
+  "deleteConfirm": "Bist du sicher, dass du diese Reise löschen möchtest? Diese Aktion kann nicht rückgängig gemacht werden.",
+  "cancel": "Abbrechen",
+  "delete": "Löschen",
+  
+  "errorOccurred": "Ein Fehler ist aufgetreten",
+  "tryAgain": "Erneut versuchen",
+  "goBack": "Zurück"
+}
+

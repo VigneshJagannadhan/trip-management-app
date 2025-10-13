@@ -1,0 +1,63 @@
+{
+  "@@locale": "en",
+  
+  "appTitle": "Trippify",
+  "welcomeBack": "Welcome back!",
+  "yourTrips": "Your Trips",
+  "searchTrips": "Search your trips...",
+  "noTrips": "No trips yet",
+  "startAdventure": "Start your adventure by creating\nyour first trip",
+  "createTrip": "Create Trip",
+  "loadingTrips": "Loading your trips...",
+  
+  "tripName": "Trip Name",
+  "location": "Location",
+  "description": "Description (Optional)",
+  "descriptionHint": "Tell us about your trip...",
+  "startDate": "Start Date",
+  "endDate": "End Date",
+  "selectImage": "Select Image",
+  "uploading": "Uploading...",
+  "create": "Create",
+  
+  "tripDetails": "Trip Details",
+  "members": "Members",
+  "inviteFriends": "Invite Friends",
+  "addMorePeople": "Add more people to this trip",
+  "duration": "Duration",
+  "active": "Active",
+  
+  "settings": "Settings",
+  "profile": "Profile",
+  "subscriptions": "Subscriptions",
+  "themeMode": "Theme Mode",
+  "darkMode": "Dark Mode",
+  "lightMode": "Light Mode",
+  "logout": "Logout",
+  
+  "editProfile": "Edit Profile",
+  "displayName": "Display Name",
+  "phoneNumber": "Phone Number (Optional)",
+  "email": "Email",
+  "verified": "Verified",
+  "saveChanges": "Save Changes",
+  
+  "upgradeToPremium": "Upgrade to Premium",
+  "unlockFeatures": "Unlock unlimited trips and premium features",
+  "monthlyPlan": "Monthly Plan",
+  "yearlyPlan": "Yearly Plan",
+  "perMonth": "/month",
+  "perYear": "/year",
+  "bestValue": "BEST VALUE",
+  "subscribe": "Subscribe",
+  
+  "deleteTrip": "Delete Trip",
+  "deleteConfirm": "Are you sure you want to delete this trip? This action cannot be undone.",
+  "cancel": "Cancel",
+  "delete": "Delete",
+  
+  "errorOccurred": "An error occurred",
+  "tryAgain": "Try again",
+  "goBack": "Go Back"
+}
+

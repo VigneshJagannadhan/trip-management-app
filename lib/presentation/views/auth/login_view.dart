@@ -6,6 +6,7 @@ import 'package:trippify/core/utils/app_validators.dart';
 import 'package:trippify/presentation/viewmodels/auth_viewmodel.dart';
 import 'package:trippify/presentation/views/auth/register_view.dart';
 import 'package:trippify/presentation/views/home/bottom_nav_view.dart';
+import 'package:trippify/presentation/widgets/custom_text_form_field.dart';
 import 'package:trippify/presentation/widgets/primary_button.dart';
 
 class LoginView extends StatelessWidget {
@@ -34,18 +35,16 @@ class LoginView extends StatelessWidget {
             children: [
               Text("Login to Trippify", style: ts24CFFW400),
               SizedBox(height: 20.h),
-              TextFormField(
-                style: ts14CFFFW400,
+              CustomTextFormField(
                 controller: emailController,
+                label: "Email",
                 validator: validateEmail,
-                decoration: InputDecoration(label: Text("Email")),
               ),
               SizedBox(height: 20.h),
-              TextFormField(
-                style: ts14CFFFW400,
+              CustomTextFormField(
                 controller: passwordController,
+                label: "Password",
                 validator: validatePasswordLogin,
-                decoration: InputDecoration(label: Text("Password")),
               ),
               SizedBox(height: 20.h),
               Consumer<AuthViewmodel>(

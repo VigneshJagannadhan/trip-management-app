@@ -1,0 +1,63 @@
+{
+  "@@locale": "it",
+  
+  "appTitle": "Trippify",
+  "welcomeBack": "Bentornato!",
+  "yourTrips": "I Tuoi Viaggi",
+  "searchTrips": "Cerca i tuoi viaggi...",
+  "noTrips": "Nessun viaggio ancora",
+  "startAdventure": "Inizia la tua avventura creando\nil tuo primo viaggio",
+  "createTrip": "Crea Viaggio",
+  "loadingTrips": "Caricamento dei tuoi viaggi...",
+  
+  "tripName": "Nome del Viaggio",
+  "location": "Posizione",
+  "description": "Descrizione (Opzionale)",
+  "descriptionHint": "Raccontaci del tuo viaggio...",
+  "startDate": "Data di Inizio",
+  "endDate": "Data di Fine",
+  "selectImage": "Seleziona Immagine",
+  "uploading": "Caricamento...",
+  "create": "Crea",
+  
+  "tripDetails": "Dettagli del Viaggio",
+  "members": "Membri",
+  "inviteFriends": "Invita Amici",
+  "addMorePeople": "Aggiungi più persone a questo viaggio",
+  "duration": "Durata",
+  "active": "Attivo",
+  
+  "settings": "Impostazioni",
+  "profile": "Profilo",
+  "subscriptions": "Abbonamenti",
+  "themeMode": "Modalità Tema",
+  "darkMode": "Modalità Scura",
+  "lightMode": "Modalità Chiara",
+  "logout": "Disconnetti",
+  
+  "editProfile": "Modifica Profilo",
+  "displayName": "Nome Visualizzato",
+  "phoneNumber": "Numero di Telefono (Opzionale)",
+  "email": "Email",
+  "verified": "Verificato",
+  "saveChanges": "Salva Modifiche",
+  
+  "upgradeToPremium": "Passa a Premium",
+  "unlockFeatures": "Sblocca viaggi illimitati e funzionalità premium",
+  "monthlyPlan": "Piano Mensile",
+  "yearlyPlan": "Piano Annuale",
+  "perMonth": "/mese",
+  "perYear": "/anno",
+  "bestValue": "MIGLIOR VALORE",
+  "subscribe": "Abbonati",
+  
+  "deleteTrip": "Elimina Viaggio",
+  "deleteConfirm": "Sei sicuro di voler eliminare questo viaggio? Questa azione non può essere annullata.",
+  "cancel": "Annulla",
+  "delete": "Elimina",
+  
+  "errorOccurred": "Si è verificato un errore",
+  "tryAgain": "Riprova",
+  "goBack": "Torna Indietro"
+}
+

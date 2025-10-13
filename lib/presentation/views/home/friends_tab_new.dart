@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:trippify/core/theme/app_colors.dart';
-import 'package:trippify/data/models/user_model.dart';
 import 'package:trippify/data/models/friend_request_model.dart';
+import 'package:trippify/data/models/user_model.dart';
 import 'package:trippify/presentation/viewmodels/friend_viewmodel.dart';
 import 'package:trippify/presentation/viewmodels/user_viewmodel.dart';
 
@@ -47,8 +47,13 @@ class _FriendsTabState extends State<FriendsTab>
       body: SafeArea(
         child: Column(
           children: [
+            // Header
             _buildHeader(isDarkMode),
+
+            // Tab Bar
             _buildTabBar(isDarkMode),
+
+            // Tab Views
             Expanded(
               child: TabBarView(
                 controller: _tabController,
@@ -56,6 +61,15 @@ class _FriendsTabState extends State<FriendsTab>
               ),
             ),
           ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () => _showAddFriendDialog(),
+        backgroundColor: secondaryColor,
+        icon: const Icon(Icons.person_add, color: Colors.white),
+        label: const Text(
+          'Add Friend',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
         ),
       ),
     );
@@ -70,118 +84,40 @@ class _FriendsTabState extends State<FriendsTab>
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Friends",
-                    style: TextStyle(
-                      fontSize: 28.sp,
-                      fontWeight: FontWeight.w700,
-                      color: isDarkMode ? Colors.white : neutral900,
-                    ),
-                  ),
-                  SizedBox(height: 4.h),
-                  Consumer<FriendViewmodel>(
-                    builder: (context, friendVM, _) {
-                      final friendCount = friendVM.friends.length;
-                      return Text(
-                        '$friendCount ${friendCount == 1 ? 'friend' : 'friends'}',
-                        style: TextStyle(
-                          fontSize: 14.sp,
-                          color: isDarkMode ? neutral400 : neutral600,
-                        ),
-                      );
-                    },
-                  ),
-                ],
+              Text(
+                "Friends",
+                style: TextStyle(
+                  fontSize: 28.sp,
+                  fontWeight: FontWeight.w700,
+                  color: isDarkMode ? Colors.white : neutral900,
+                ),
               ),
               Consumer<FriendViewmodel>(
                 builder: (context, friendVM, _) {
                   final requestCount = friendVM.pendingRequests.length;
+                  if (requestCount == 0) return const SizedBox.shrink();
 
                   return Container(
-                    padding: EdgeInsets.all(8.r),
-                    decoration: BoxDecoration(
-                      color:
-                          requestCount > 0
-                              ? accentOrange
-                              : (isDarkMode ? neutral800 : neutral200),
-                      shape: BoxShape.circle,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 12.w,
+                      vertical: 6.h,
                     ),
-                    child: Stack(
-                      children: [
-                        Icon(
-                          Icons.notifications,
-                          color:
-                              requestCount > 0
-                                  ? Colors.white
-                                  : (isDarkMode ? neutral400 : neutral600),
-                          size: 24.r,
-                        ),
-                        if (requestCount > 0)
-                          Positioned(
-                            right: 0,
-                            top: 0,
-                            child: Container(
-                              padding: EdgeInsets.all(4.r),
-                              decoration: const BoxDecoration(
-                                color: Colors.red,
-                                shape: BoxShape.circle,
-                              ),
-                              child: Text(
-                                '$requestCount',
-                                style: TextStyle(
-                                  fontSize: 10.sp,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ),
-                            ),
-                          ),
-                      ],
+                    decoration: BoxDecoration(
+                      color: accentOrange,
+                      borderRadius: BorderRadius.circular(12.r),
+                    ),
+                    child: Text(
+                      '$requestCount ${requestCount == 1 ? 'Request' : 'Requests'}',
+                      style: TextStyle(
+                        fontSize: 12.sp,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   );
                 },
               ),
             ],
-          ),
-          SizedBox(height: 16.h),
-          GestureDetector(
-            onTap: _showAddFriendDialog,
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [secondaryColor, accentPurple],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-                borderRadius: BorderRadius.circular(12.r),
-                boxShadow: [
-                  BoxShadow(
-                    color: secondaryColor.withValues(alpha: 0.3),
-                    blurRadius: 12,
-                    offset: const Offset(0, 4),
-                  ),
-                ],
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.person_add, color: Colors.white, size: 22.r),
-                  SizedBox(width: 8.w),
-                  Text(
-                    'Add New Friend',
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ],
-              ),
-            ),
           ),
         ],
       ),
@@ -191,7 +127,6 @@ class _FriendsTabState extends State<FriendsTab>
   Widget _buildTabBar(bool isDarkMode) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 20.w),
-      padding: EdgeInsets.all(4.w),
       decoration: BoxDecoration(
         color: isDarkMode ? neutral800 : neutral100,
         borderRadius: BorderRadius.circular(12.r),
@@ -200,10 +135,8 @@ class _FriendsTabState extends State<FriendsTab>
         controller: _tabController,
         indicator: BoxDecoration(
           color: secondaryColor,
-          borderRadius: BorderRadius.circular(10.r),
+          borderRadius: BorderRadius.circular(12.r),
         ),
-        indicatorSize: TabBarIndicatorSize.tab,
-        dividerColor: Colors.transparent,
         labelColor: Colors.white,
         unselectedLabelColor: isDarkMode ? neutral400 : neutral600,
         labelStyle: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
@@ -225,14 +158,13 @@ class _FriendsTabState extends State<FriendsTab>
 
         return Column(
           children: [
+            // Search bar
             Padding(padding: EdgeInsets.all(20.w), child: _buildSearchBar()),
+
+            // Friends list
             Expanded(
               child: ListView.builder(
-                padding: EdgeInsets.only(
-                  left: 20.w,
-                  right: 20.w,
-                  bottom: 100.h,
-                ),
+                padding: EdgeInsets.symmetric(horizontal: 20.w),
                 itemCount: friendVM.friends.length,
                 itemBuilder: (context, index) {
                   final friend = friendVM.friends[index];
@@ -360,12 +292,7 @@ class _FriendsTabState extends State<FriendsTab>
         }
 
         return ListView.builder(
-          padding: EdgeInsets.only(
-            left: 20.w,
-            right: 20.w,
-            top: 20.h,
-            bottom: 100.h,
-          ),
+          padding: EdgeInsets.all(20.w),
           itemCount: friendVM.pendingRequests.length,
           itemBuilder: (context, index) {
             final request = friendVM.pendingRequests[index];
@@ -630,6 +557,7 @@ class _AddFriendBottomSheetState extends State<_AddFriendBottomSheet> {
       ),
       child: Column(
         children: [
+          // Handle
           Container(
             margin: EdgeInsets.only(top: 12.h),
             width: 40.w,
@@ -639,6 +567,8 @@ class _AddFriendBottomSheetState extends State<_AddFriendBottomSheet> {
               borderRadius: BorderRadius.circular(2.r),
             ),
           ),
+
+          // Header
           Padding(
             padding: EdgeInsets.all(20.w),
             child: Text(
@@ -650,6 +580,8 @@ class _AddFriendBottomSheetState extends State<_AddFriendBottomSheet> {
               ),
             ),
           ),
+
+          // Search field
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.w),
             child: TextField(
@@ -683,6 +615,8 @@ class _AddFriendBottomSheetState extends State<_AddFriendBottomSheet> {
           ),
 
           SizedBox(height: 16.h),
+
+          // Results
           Expanded(
             child: Consumer<FriendViewmodel>(
               builder: (context, friendVM, _) {

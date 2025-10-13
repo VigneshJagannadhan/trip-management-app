@@ -6,6 +6,7 @@ import 'package:trippify/core/utils/app_validators.dart';
 import 'package:trippify/presentation/viewmodels/auth_viewmodel.dart';
 import 'package:trippify/presentation/views/auth/login_view.dart';
 import 'package:trippify/presentation/views/home/bottom_nav_view.dart';
+import 'package:trippify/presentation/widgets/custom_text_form_field.dart';
 import 'package:trippify/presentation/widgets/primary_button.dart';
 import 'package:trippify/presentation/widgets/snackbars/general_error_snackbar.dart';
 
@@ -46,40 +47,33 @@ class RegisterView extends StatelessWidget {
               SizedBox(height: 20.h),
 
               /// FULL NAME
-              TextFormField(
-                style: ts14CFFFW400,
+              CustomTextFormField(
+                label: "Full name",
                 controller: nameController,
                 validator: validateName,
-                decoration: InputDecoration(label: Text("Full name")),
               ),
               SizedBox(height: 20.h),
-              TextFormField(
-                style: ts14CFFFW400,
+              CustomTextFormField(
+                label: "Nick name (Optional)",
                 controller: nickNameController,
-                decoration: InputDecoration(
-                  label: Text("Nick name (Optional)"),
-                ),
               ),
               SizedBox(height: 20.h),
-              TextFormField(
-                style: ts14CFFFW400,
+              CustomTextFormField(
+                label: "Email",
                 controller: emailController,
                 validator: validateEmail,
-                decoration: InputDecoration(label: Text("Email")),
               ),
               SizedBox(height: 20.h),
-              TextFormField(
-                style: ts14CFFFW400,
+              CustomTextFormField(
                 controller: passwordController,
+                label: "Password",
                 validator: validatePasswordRegistration,
-                decoration: InputDecoration(label: Text("Password")),
               ),
               SizedBox(height: 20.h),
-              TextFormField(
-                style: ts14CFFFW400,
+              CustomTextFormField(
+                label: "Confirm Password",
                 controller: confirmPasswordController,
                 validator: validatePasswordRegistration,
-                decoration: InputDecoration(label: Text("Confirm Password")),
               ),
               SizedBox(height: 20.h),
               Consumer<AuthViewmodel>(

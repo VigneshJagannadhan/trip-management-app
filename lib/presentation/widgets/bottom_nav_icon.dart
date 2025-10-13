@@ -17,8 +17,23 @@ class BottomNavIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
     final Color iconColor =
-        isSelected ? colorFFF : colorFFF.withValues(alpha: 0.7);
+        isDarkMode
+            ? (isSelected ? colorFFF : colorFFF.withValues(alpha: 0.6))
+            : (isSelected ? secondaryColor : neutral600);
+
+    final Color bgColor =
+        isDarkMode
+            ? Colors.white.withValues(alpha: 0.08)
+            : secondaryColor.withValues(alpha: 0.1);
+
+    final Color borderColor =
+        isDarkMode
+            ? Colors.white.withValues(alpha: 0.20)
+            : secondaryColor.withValues(alpha: 0.3);
+
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(14.r),
@@ -27,11 +42,9 @@ class BottomNavIcon extends StatelessWidget {
         decoration:
             isSelected
                 ? BoxDecoration(
-                  color: Colors.white.withValues(alpha: 0.08),
+                  color: bgColor,
                   borderRadius: BorderRadius.circular(14.r),
-                  border: Border.all(
-                    color: Colors.white.withValues(alpha: 0.20),
-                  ),
+                  border: Border.all(color: borderColor),
                 )
                 : null,
         child: SvgPicture.asset(

@@ -15,7 +15,7 @@ class PrimaryButton extends StatelessWidget {
   });
 
   final String label;
-  final Function() onTap;
+  final Function()? onTap;
   final Color? backgroundColor;
   final bool isLoading;
 

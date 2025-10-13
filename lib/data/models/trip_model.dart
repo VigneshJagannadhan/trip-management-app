@@ -4,6 +4,7 @@ class TripModel {
   final String id;
   final String name;
   final String location;
+  final String description;
   final DateTime startTime;
   final DateTime endTime;
   final String creatorId;
@@ -14,6 +15,7 @@ class TripModel {
     required this.id,
     required this.name,
     required this.location,
+    this.description = '',
     required this.startTime,
     required this.endTime,
     required this.creatorId,
@@ -27,6 +29,7 @@ class TripModel {
       id: docId,
       name: map['name'] ?? '',
       location: map['location'] ?? '',
+      description: map['description'] ?? '',
       startTime: (map['startTime'] as Timestamp).toDate(),
       endTime: (map['endTime'] as Timestamp).toDate(),
       creatorId: map['creatorId'] ?? '',
@@ -40,6 +43,7 @@ class TripModel {
     return {
       'name': name,
       'location': location,
+      if (description.isNotEmpty) 'description': description,
       'startTime': Timestamp.fromDate(startTime),
       'endTime': Timestamp.fromDate(endTime),
       'creatorId': creatorId,

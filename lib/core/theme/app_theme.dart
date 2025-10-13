@@ -4,17 +4,20 @@ import 'package:trippify/core/theme/app_colors.dart';
 import 'package:trippify/core/theme/app_styles.dart';
 
 ThemeData appTheme({required bool darkMode}) {
-  final primary = darkMode ? primaryColor : darkPrimaryColor;
   final secondary = darkMode ? secondaryColor : darkSecondaryColor;
   final scaffoldBg = darkMode ? primaryColor : darkPrimaryColor;
-  final textColor = darkMode ? Colors.black : Colors.white;
+  final textColor = darkMode ? neutral50 : neutral900;
 
   return ThemeData(
     scaffoldBackgroundColor: scaffoldBg,
-    brightness: darkMode ? Brightness.light : Brightness.dark,
+    brightness: darkMode ? Brightness.dark : Brightness.light,
     colorScheme: ColorScheme.fromSeed(
-      seedColor: primary,
-      brightness: darkMode ? Brightness.light : Brightness.dark,
+      seedColor: secondaryColor,
+      brightness: darkMode ? Brightness.dark : Brightness.light,
+      primary: secondaryColor,
+      secondary: accentTeal,
+      surface: darkMode ? neutral800 : neutral50,
+      surfaceTint: scaffoldBg,
     ),
     useMaterial3: true,
 
@@ -41,40 +44,44 @@ ThemeData appTheme({required bool darkMode}) {
     /// --- TextField theme ---
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
-      fillColor:
-          darkMode
-              ? Colors.white.withValues(alpha: 0.05)
-              : Colors.white.withValues(alpha: 0.08),
-      contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
-      labelStyle: ts14CFFFW400,
+      fillColor: darkMode ? neutral800 : neutral100,
+      contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+      labelStyle: TextStyle(
+        color: darkMode ? neutral300 : neutral600,
+        fontSize: 14.sp,
+        fontWeight: FontWeight.w500,
+      ),
 
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(20.r),
+        borderRadius: BorderRadius.circular(12.r),
         borderSide: BorderSide(
-          color: Colors.white.withValues(alpha: darkMode ? 0.2 : 0.3),
+          color: darkMode ? neutral600 : neutral300,
           width: 1.r,
         ),
       ),
 
       enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(20.r),
+        borderRadius: BorderRadius.circular(12.r),
         borderSide: BorderSide(
-          color: Colors.white.withValues(alpha: darkMode ? 0.3 : 0.4),
+          color: darkMode ? neutral600 : neutral300,
           width: 1.r,
         ),
       ),
 
       focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(20.r),
-        borderSide: BorderSide(
-          color: Colors.white.withValues(alpha: darkMode ? 0.8 : 0.9),
-          width: 1.r,
-        ),
+        borderRadius: BorderRadius.circular(12.r),
+        borderSide: BorderSide(color: secondaryColor, width: 2.r),
+      ),
+
+      errorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12.r),
+        borderSide: BorderSide(color: accentOrange, width: 1.r),
       ),
 
       hintStyle: TextStyle(
-        color: Colors.white.withValues(alpha: darkMode ? 0.5 : 0.6),
+        color: darkMode ? neutral400 : neutral500,
         fontSize: 14.sp,
+        fontWeight: FontWeight.w400,
       ),
     ),
   );
