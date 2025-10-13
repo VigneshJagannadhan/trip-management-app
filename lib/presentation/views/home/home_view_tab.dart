@@ -47,21 +47,21 @@ class _HomeViewTabState extends State<HomeViewTab> {
 
         return Scaffold(
           body: CustomScrollView(
-          slivers: [
+            slivers: [
               HomeViewSliverAppbar(
                 onSearchChanged: (query) {
                   setState(() => searchQuery = query);
                 },
               ),
-            SliverPadding(
+              SliverPadding(
                 padding: EdgeInsets.only(
                   left: 20.w,
                   right: 20.w,
                   top: 20.h,
                   bottom: 20.h,
                 ),
-              sliver:
-                  tripVM.isLoading
+                sliver:
+                    tripVM.isLoading
                         ? SliverFillRemaining(child: _buildLoadingState())
                         : filteredTrips.isEmpty
                         ? SliverFillRemaining(child: _buildEmptyState())
@@ -266,14 +266,14 @@ class _HomeViewSliverAppbarState extends State<HomeViewSliverAppbar> {
           ),
           child: SafeArea(
             child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w),
-            child: Column(
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+                children: [
                   SizedBox(height: 12.h),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -339,7 +339,7 @@ class _HomeViewSliverAppbarState extends State<HomeViewSliverAppbar> {
                               );
                             },
                             child: Container(
-                      padding: EdgeInsets.all(10.r),
+                              padding: EdgeInsets.all(10.r),
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 color:

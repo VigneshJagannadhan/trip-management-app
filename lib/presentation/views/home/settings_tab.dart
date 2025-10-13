@@ -74,9 +74,9 @@ class SettingsTab extends StatelessWidget {
       ),
       body: Container(
         padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
             Consumer<ThemeViewmodel>(
               builder: (context, themeVM, child) {
                 return Container(
@@ -221,31 +221,31 @@ class SettingsTab extends StatelessWidget {
                 );
               },
             ),
-          SizedBox(height: 20.h),
+            SizedBox(height: 20.h),
             PrimaryButton(
               label: AppLocalizations.of(context)!.profile,
               onTap: () async {
                 Navigator.of(context).pushNamed(ProfileEditView.route);
               },
             ),
-          SizedBox(height: 20.h),
+            SizedBox(height: 20.h),
             PrimaryButton(
               label: AppLocalizations.of(context)!.subscriptions,
               onTap: () async {
                 Navigator.of(context).pushNamed(SubscriptionView.route);
               },
             ),
-          SizedBox(height: 20.h),
-          PrimaryButton(
+            SizedBox(height: 20.h),
+            PrimaryButton(
               label: AppLocalizations.of(context)!.logout,
-            onTap: () async {
-              await FirebaseAuth.instance.signOut();
-              Navigator.of(context).pushReplacementNamed(LoginView.route);
-            },
-            backgroundColor: Colors.red,
-          ),
-          SizedBox(height: 20.h),
-        ],
+              onTap: () async {
+                await FirebaseAuth.instance.signOut();
+                Navigator.of(context).pushReplacementNamed(LoginView.route);
+              },
+              backgroundColor: Colors.red,
+            ),
+            SizedBox(height: 20.h),
+          ],
         ),
       ),
     );

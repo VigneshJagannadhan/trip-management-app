@@ -102,3 +102,4 @@ jobs:
           filename: build/app/outputs/flutter-apk/app-release.apk
           folderId: ${{ secrets.GDRIVE_FOLDER_ID }}
           name: trippify-${{ github.sha }}.apk
+          isBase64: false
