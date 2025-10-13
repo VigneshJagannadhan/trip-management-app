@@ -5,6 +5,9 @@ import 'package:trippify/core/theme/app_colors.dart';
 import 'package:trippify/data/models/trip_model.dart';
 import 'package:trippify/presentation/viewmodels/trip_viewmodel.dart';
 import 'package:trippify/presentation/widgets/chat_tile.dart';
+import 'package:trippify/presentation/views/home/create_trip_tab.dart';
+import 'package:trippify/presentation/views/home/friends_tab.dart';
+import 'package:trippify/presentation/views/home/settings_tab.dart';
 
 class HomeViewTab extends StatefulWidget {
   const HomeViewTab({super.key});
@@ -41,33 +44,55 @@ class _HomeViewTabState extends State<HomeViewTab> {
       builder: (context, tripVM, child) {
         final filteredTrips = getFilteredTrips(tripVM.trips);
 
-        return CustomScrollView(
-          slivers: [
-            HomeViewSliverAppbar(
-              onSearchChanged: (query) {
-                setState(() => searchQuery = query);
-              },
-            ),
-            SliverPadding(
-              padding: EdgeInsets.only(
-                left: 20.w,
-                right: 20.w,
-                top: 20.h,
-                bottom: 100.h,
+        return Scaffold(
+          body: CustomScrollView(
+            slivers: [
+              HomeViewSliverAppbar(
+                onSearchChanged: (query) {
+                  setState(() => searchQuery = query);
+                },
               ),
-              sliver:
-                  tripVM.isLoading
-                      ? SliverFillRemaining(child: _buildLoadingState())
-                      : filteredTrips.isEmpty
-                      ? SliverFillRemaining(child: _buildEmptyState())
-                      : SliverList(
-                        delegate: SliverChildBuilderDelegate((context, index) {
-                          final trip = filteredTrips[index];
-                          return ChatTile(trip: trip);
-                        }, childCount: filteredTrips.length),
-                      ),
+              SliverPadding(
+                padding: EdgeInsets.only(
+                  left: 20.w,
+                  right: 20.w,
+                  top: 20.h,
+                  bottom: 20.h,
+                ),
+                sliver:
+                    tripVM.isLoading
+                        ? SliverFillRemaining(child: _buildLoadingState())
+                        : filteredTrips.isEmpty
+                        ? SliverFillRemaining(child: _buildEmptyState())
+                        : SliverList(
+                          delegate: SliverChildBuilderDelegate((
+                            context,
+                            index,
+                          ) {
+                            final trip = filteredTrips[index];
+                            return ChatTile(trip: trip);
+                          }, childCount: filteredTrips.length),
+                        ),
+              ),
+            ],
+          ),
+          floatingActionButton: FloatingActionButton.extended(
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const CreateTripTab()),
+              );
+            },
+            backgroundColor: secondaryColor,
+            icon: const Icon(Icons.add, color: Colors.white),
+            label: Text(
+              'Create Trip',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w600,
+              ),
             ),
-          ],
+          ),
         );
       },
     );
@@ -270,26 +295,72 @@ class _HomeViewSliverAppbarState extends State<HomeViewSliverAppbar> {
                           ),
                         ],
                       ),
-                      Container(
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            color:
-                                isDarkMode
-                                    ? Colors.white.withValues(alpha: 0.2)
-                                    : neutral300,
-                            width: 2,
+                      Row(
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => const FriendsTab(),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              padding: EdgeInsets.all(10.r),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color:
+                                    isDarkMode
+                                        ? Colors.white.withValues(alpha: 0.1)
+                                        : neutral100,
+                                border: Border.all(
+                                  color:
+                                      isDarkMode
+                                          ? Colors.white.withValues(alpha: 0.2)
+                                          : neutral300,
+                                  width: 1,
+                                ),
+                              ),
+                              child: Icon(
+                                Icons.people,
+                                color: isDarkMode ? Colors.white : neutral700,
+                                size: 22.r,
+                              ),
+                            ),
                           ),
-                        ),
-                        child: CircleAvatar(
-                          radius: 22.r,
-                          backgroundColor: isDarkMode ? neutral700 : neutral200,
-                          child: Icon(
-                            Icons.person,
-                            color: isDarkMode ? Colors.white : neutral600,
-                            size: 24.r,
+                          SizedBox(width: 12.w),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => const SettingsTab(),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              padding: EdgeInsets.all(10.r),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color:
+                                    isDarkMode
+                                        ? Colors.white.withValues(alpha: 0.1)
+                                        : neutral100,
+                                border: Border.all(
+                                  color:
+                                      isDarkMode
+                                          ? Colors.white.withValues(alpha: 0.2)
+                                          : neutral300,
+                                  width: 1,
+                                ),
+                              ),
+                              child: Icon(
+                                Icons.settings,
+                                color: isDarkMode ? Colors.white : neutral700,
+                                size: 22.r,
+                              ),
+                            ),
                           ),
-                        ),
+                        ],
                       ),
                     ],
                   ),

@@ -50,20 +50,32 @@ class SettingsTab extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 70.h),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "Settings",
-            style: TextStyle(
-              fontSize: 28.sp,
-              fontWeight: FontWeight.w700,
-              color: isDarkMode ? Colors.white : neutral900,
-            ),
+    return Scaffold(
+      backgroundColor: isDarkMode ? primaryColor : Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: isDarkMode ? Colors.white : neutral900,
           ),
-          SizedBox(height: 20.h),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+        title: Text(
+          "Settings",
+          style: TextStyle(
+            fontSize: 20.sp,
+            fontWeight: FontWeight.w600,
+            color: isDarkMode ? Colors.white : neutral900,
+          ),
+        ),
+      ),
+      body: Container(
+        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
           Consumer<ThemeViewmodel>(
             builder: (context, themeVM, child) {
               return Container(
@@ -227,7 +239,8 @@ class SettingsTab extends StatelessWidget {
             backgroundColor: Colors.red,
           ),
           SizedBox(height: 20.h),
-        ],
+          ],
+        ),
       ),
     );
   }

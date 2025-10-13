@@ -44,57 +44,60 @@ class _FriendsTabState extends State<FriendsTab>
 
     return Scaffold(
       backgroundColor: isDarkMode ? primaryColor : Colors.white,
-      body: SafeArea(
-        child: Column(
-          children: [
-            _buildHeader(isDarkMode),
-            _buildTabBar(isDarkMode),
-            Expanded(
-              child: TabBarView(
-                controller: _tabController,
-                children: [_buildFriendsList(), _buildFriendRequests()],
-              ),
-            ),
-          ],
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: isDarkMode ? Colors.white : neutral900,
+          ),
+          onPressed: () => Navigator.of(context).pop(),
         ),
+        title: Text(
+          "Friends",
+          style: TextStyle(
+            fontSize: 20.sp,
+            fontWeight: FontWeight.w600,
+            color: isDarkMode ? Colors.white : neutral900,
+          ),
+        ),
+      ),
+      body: Column(
+        children: [
+          _buildHeader(isDarkMode),
+          _buildTabBar(isDarkMode),
+          Expanded(
+            child: TabBarView(
+              controller: _tabController,
+              children: [_buildFriendsList(), _buildFriendRequests()],
+            ),
+          ),
+        ],
       ),
     );
   }
 
   Widget _buildHeader(bool isDarkMode) {
     return Padding(
-      padding: EdgeInsets.all(20.w),
+      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Friends",
+              Consumer<FriendViewmodel>(
+                builder: (context, friendVM, _) {
+                  final friendCount = friendVM.friends.length;
+                  return Text(
+                    '$friendCount ${friendCount == 1 ? 'friend' : 'friends'}',
                     style: TextStyle(
-                      fontSize: 28.sp,
-                      fontWeight: FontWeight.w700,
-                      color: isDarkMode ? Colors.white : neutral900,
+                      fontSize: 14.sp,
+                      color: isDarkMode ? neutral400 : neutral600,
                     ),
-                  ),
-                  SizedBox(height: 4.h),
-                  Consumer<FriendViewmodel>(
-                    builder: (context, friendVM, _) {
-                      final friendCount = friendVM.friends.length;
-                      return Text(
-                        '$friendCount ${friendCount == 1 ? 'friend' : 'friends'}',
-                        style: TextStyle(
-                          fontSize: 14.sp,
-                          color: isDarkMode ? neutral400 : neutral600,
-                        ),
-                      );
-                    },
-                  ),
-                ],
+                  );
+                },
               ),
               Consumer<FriendViewmodel>(
                 builder: (context, friendVM, _) {
