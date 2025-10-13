@@ -2,13 +2,13 @@
 
 > A modern, full-featured travel planning and collaboration platform built with Flutter, Firebase, and Supabase.
 
-[![Flutter](https://img.shields.io/badge/Flutter-3.7.2+-02569B?logo=flutter)](https://flutter.dev)
+[![Flutter](https://img.shields.io/badge/Flutter-3.29.3-02569B?logo=flutter)](https://flutter.dev)
 [![Firebase](https://img.shields.io/badge/Firebase-Latest-FFCA28?logo=firebase)](https://firebase.google.com)
 [![Supabase](https://img.shields.io/badge/Supabase-Latest-3ECF8E?logo=supabase)](https://supabase.com)
 
 ## 🎯 Project Overview
 
-Trippify is a comprehensive travel planning application that enables users to create, manage, and collaborate on trips with friends. Built with clean architecture principles and modern Flutter best practices, it showcases advanced mobile development skills including real-time messaging, state management, and multi-platform support.
+Trippify is a comprehensive travel planning application that enables users to create, manage, and collaborate on trips with friends. Built with clean architecture principles and modern Flutter best practices, it showcases advanced mobile development skills including real-time messaging, state management, multi-platform support, and internationalization.
 
 <img width="2160" height="1080" alt="trippify_2" src="https://github.com/user-attachments/assets/b910b1e8-8892-4b0b-8d27-260047090d94" />
 
@@ -16,9 +16,11 @@ Trippify is a comprehensive travel planning application that enables users to cr
 - 🏗️ **Clean Architecture** with separation of concerns
 - 🔄 **Real-time Features** using Firebase Firestore streams
 - 🎨 **Modern UI/UX** with light/dark mode support
-- 🌐 **Internationalization** supporting 4 languages
+- 🌐 **Internationalization** supporting 4 languages with dynamic switching
 - 📱 **Cross-platform** (iOS & Android)
 - 🔐 **Secure** authentication and data management
+- 🛡️ **Robust Error Handling** with custom exception management
+- 🎯 **Advanced State Management** with Provider pattern
 
 ## ✨ Features Showcase
 
@@ -45,10 +47,12 @@ Trippify is a comprehensive travel planning application that enables users to cr
 
 ### 4. User Experience
 - **Profile Management**: Edit display name, phone, view email
-- **Theme Toggle**: Switch between light and dark modes
-- **Multi-Language**: Support for English, Spanish, German, Italian
+- **Theme Toggle**: Switch between light and dark modes with persistence
+- **Multi-Language**: Support for English, Spanish, German, Italian with runtime switching
 - **Subscription Plans**: Premium tier with feature comparison
 - **Responsive Design**: Adapts to different screen sizes
+- **Splash Screen**: Beautiful loading experience with app initialization
+- **Bottom Navigation**: Intuitive tab-based navigation system
 
 ## 🏛️ Technical Architecture
 
@@ -68,39 +72,44 @@ Firebase/Supabase (Backend)
 - **ChangeNotifier**: Reactive state updates
 - **Consumer/Selector**: Efficient widget rebuilds
 - **GetIt**: Dependency injection for repositories
+- **BaseViewmodel**: Common state management pattern
+- **Custom Error Handling**: AppException for consistent error management
 
 ### Data Flow
 1. User interacts with UI
-2. ViewModel processes business logic
+2. ViewModel processes business logic (inherits from BaseViewmodel)
 3. Repository handles data operations
 4. Firebase/Supabase stores/retrieves data
 5. UI updates reactively via Provider
+6. Custom error handling with AppException
+7. Environment configuration via .env files
 
 ## 🛠️ Technologies Used
 
 ### Core
-- **Flutter 3.7.2+** - UI framework
-- **Dart** - Programming language
-- **Provider** - State management
-- **GetIt** - Dependency injection
+- **Flutter 3.29.3** - UI framework
+- **Dart 3.7.2** - Programming language
+- **Provider 6.1.5+** - State management
+- **GetIt 8.2.0** - Dependency injection
 
 ### Backend Services
-- **Firebase Authentication** - User auth
-- **Cloud Firestore** - NoSQL database
-- **Supabase Storage** - Image storage
+- **Firebase Authentication 6.1.0** - User auth
+- **Cloud Firestore 6.0.2** - NoSQL database
+- **Supabase Storage 2.8.0** - Image storage
 - **Firebase Streams** - Real-time updates
 
 ### UI/UX
-- **flutter_screenutil** - Responsive design
-- **google_fonts** - Typography
-- **flutter_svg** - Vector graphics
-- **lottie** - Animations
-- **image_picker** - Photo selection
+- **flutter_screenutil 5.9.0** - Responsive design
+- **google_fonts 6.3.2** - Typography
+- **flutter_svg 2.2.1** - Vector graphics
+- **lottie 3.3.1** - Animations
+- **image_picker 1.1.2** - Photo selection
 
 ### Localization
 - **flutter_localizations** - Framework support
 - **intl** - Internationalization
 - **ARB files** - Translation management
+- **Runtime Language Switching** - Dynamic language changes
 
 ## 📊 Database Schema
 
@@ -161,6 +170,19 @@ Stream<List<ChatMessageModel>> getMessages({required String chatroomId}) {
 }
 ```
 
+### Base Viewmodel Pattern
+```dart
+abstract class BaseViewmodel extends ChangeNotifier {
+  bool _isLoading = false;
+  bool get isLoading => _isLoading;
+  
+  void setLoading(bool loading) {
+    _isLoading = loading;
+    notifyListeners();
+  }
+}
+```
+
 ### Theme Management
 ```dart
 class ThemeViewmodel extends ChangeNotifier {
@@ -187,6 +209,19 @@ static Future<String> uploadImage({
 }
 ```
 
+### Custom Error Handling
+```dart
+class AppException implements Exception {
+  final String message;
+  final String? code;
+  
+  AppException(this.message, [this.code]);
+  
+  @override
+  String toString() => 'AppException: $message';
+}
+```
+
 ## 📱 Screenshots
 
 ### Light Mode
@@ -207,6 +242,9 @@ static Future<String> uploadImage({
 - Cross-platform compatibility checked
 - Theme switching validated
 - Localization tested for all languages
+- Error handling scenarios tested
+- Form validation verified
+- Image upload functionality tested
 
 ## 🔮 Future Enhancements
 
@@ -230,13 +268,16 @@ This project demonstrates proficiency in:
 - ✅ Supabase Storage implementation
 - ✅ Complex UI/UX design
 - ✅ Form validation and error handling
-- ✅ Internationalization (i18n)
-- ✅ Theme management
+- ✅ Internationalization (i18n) with runtime switching
+- ✅ Theme management with persistence
 - ✅ Responsive design
-- ✅ Dependency injection
+- ✅ Dependency injection with GetIt
 - ✅ Repository pattern
 - ✅ Stream-based programming
 - ✅ Image handling and optimization
+- ✅ Custom exception handling
+- ✅ Environment configuration
+- ✅ Base class patterns for code reusability
 
 ---
 
