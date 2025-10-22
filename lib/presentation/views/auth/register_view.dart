@@ -7,6 +7,7 @@ import 'package:trippify/presentation/viewmodels/auth_viewmodel.dart';
 import 'package:trippify/presentation/views/auth/login_view.dart';
 import 'package:trippify/presentation/views/home/home_view_tab.dart';
 import 'package:trippify/presentation/widgets/custom_text_form_field.dart';
+import 'package:trippify/presentation/widgets/password_form_field.dart';
 import 'package:trippify/presentation/widgets/primary_button.dart';
 import 'package:trippify/presentation/widgets/snackbars/general_error_snackbar.dart';
 
@@ -64,13 +65,13 @@ class RegisterView extends StatelessWidget {
                 validator: validateEmail,
               ),
               SizedBox(height: 20.h),
-              CustomTextFormField(
+              PasswordFormField(
                 controller: passwordController,
                 label: "Password",
                 validator: validatePasswordRegistration,
               ),
               SizedBox(height: 20.h),
-              CustomTextFormField(
+              PasswordFormField(
                 label: "Confirm Password",
                 controller: confirmPasswordController,
                 validator: validatePasswordRegistration,
